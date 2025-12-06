@@ -1,0 +1,22 @@
+import 'dotenv/config'
+import { runLLM } from './src/llm'
+
+async function main() {
+  const userMessage = process.argv[2]
+
+  if (!userMessage) {
+    console.error('Please provide a message')
+    process.exit(1)
+  }
+
+  const response = await runLLM({
+    messages: [{ role: 'user', content: userMessage }]
+  })
+
+  console.log(response)
+}
+
+main().catch((err) => {
+  console.error(err)
+  process.exit(1)
+})
