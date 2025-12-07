@@ -14,9 +14,3 @@ async function main() {
   })
 
   console.log(response)
-}
-
-main().catch((err) => {
-  console.error(err)
-  process.exit(1)
-})
