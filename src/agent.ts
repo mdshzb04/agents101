@@ -1,12 +1,14 @@
 import type { AIMessage } from '../types'
 import { runLLM } from './llm'
 import { addMessages, getMessages } from './memory'
-import { showLoader } from './ui'
+import { logMessage, showLoader } from './ui'
 
 export const runAgent = async ({
   userMessage,
+  tools = [],          // ✅ accept tools
 }: {
   userMessage: string
+  tools?: any[]        // ✅ define tools type
 }) => {
   
   await addMessages([
@@ -16,20 +18,20 @@ export const runAgent = async ({
     },
   ])
 
-  const loader = showLoader('Thinking...')
+  const loader = showLoader('🤔Thinking...')
   const history: AIMessage[] = await getMessages()
 
   const response = await runLLM({
     messages: history,
-    tools: [],
+    tools,            
   })
 
-
-  const assistantMessage: AIMessage = {
-    role: 'assistant',
-    content: response.content,
+  if (response.tool_calls) {
+    console.log(response.tool_calls)
   }
-  await addMessages([assistantMessage])
+
+  await addMessages([response])
+
   loader.stop()
   return getMessages()
 }
