@@ -14,7 +14,7 @@ const messages = await runAgent({
   tools: [{
     name: 'weather', 
     parameters: z.object({
-      location: z.string().describe('The location to get weather for')
+      location: z.string().describe('use This to get weather.does not need a city or location')
     }).describe('get the weather')
   }]
 })
