@@ -20,8 +20,8 @@ export const runAgent = async ({
   ])
 
   const loader = showLoader('Thinking...')
-
   const history = await getMessages()
+  
   const response = await runLLM({
     messages: history,
     tools,
@@ -37,7 +37,6 @@ export const runAgent = async ({
 
     const toolResponse = await runTool(toolCall, userMessage)
     await saveToolResponse(toolCall.id, toolResponse)
-
     loader.update(`executed: ${toolCall.function.name}`)
   }
 
