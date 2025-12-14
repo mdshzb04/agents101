@@ -1,7 +1,7 @@
 import type OpenAI from 'openai'
-import { generateImage } from './tools/generateImage'
-import { reddit } from './tools/reddit'
-import { dadJoke } from './tools/dadJoke'
+import { generateImage } from './generateImage'
+import { dadJoke } from './dad.Joke'
+import { reddit } from './reddit'
 
 export const runTool = async (
   toolCall: OpenAI.Chat.Completions.ChatCompletionMessageToolCall,

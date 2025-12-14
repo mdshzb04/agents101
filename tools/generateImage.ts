@@ -1,5 +1,5 @@
-import type { ToolFn } from '../../types'
-import { openai } from '../ai'
+import { openai } from '../src/ai'
+import type { ToolFn } from '../types'
 import { z } from 'zod'
 
 export const generateImageToolDefinition = {
@@ -19,7 +19,6 @@ type Args = z.infer<typeof generateImageToolDefinition.parameters>
 
 export const generateImage: ToolFn<Args, string> = async ({
   toolArgs,
-  userMessage,
 }) => {
   const response = await openai.images.generate({
     model: 'dall-e-3',
@@ -27,8 +26,10 @@ export const generateImage: ToolFn<Args, string> = async ({
     n: 1,
     size: '1024x1024',
   })
-
-  const imageUrl = response.data[0].url!
-
-  return imageUrl
+  
+  if (!response.data || response.data.length === 0 || !response.data[0].url) {
+    throw new Error('Failed to generate image: No URL returned from API')
+  }
+  
+  return response.data[0].url
 }
