@@ -1,5 +1,5 @@
-import { openai } from '../src/ai'
-import type { ToolFn } from '../types'
+import { openai } from '../ai'
+import type { ToolFn } from '../../types'
 import { z } from 'zod'
 
 export const generateImageToolDefinition = {

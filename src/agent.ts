@@ -19,25 +19,34 @@ export const runAgent = async ({
     },
   ])
 
-  const loader = showLoader('Thinking...')
-  const history = await getMessages()
+  const loader = showLoader('🤔 Thinking...')
+
+  while (true) {
+    const history = await getMessages()
+
+    const response = await runLLM({
+      messages: history,
+      tools,
+    })
+
+    await addMessages([response])
+    logMessage(response)
+
   
-  const response = await runLLM({
-    messages: history,
-    tools,
-  })
+    if (!response.tool_calls || response.tool_calls.length === 0) {
+      break
+    }
 
-  await addMessages([response])
+   
+    for (const toolCall of response.tool_calls) {
+      loader.update(`executing: ${toolCall.function.name}`)
 
-  logMessage(response)
+      const toolResponse = await runTool(toolCall, userMessage)
 
-  if (response.tool_calls) {
-    const toolCall = response.tool_calls[0]
-    loader.update(`executing: ${toolCall.function.name}`)
+      await saveToolResponse(toolCall.id, toolResponse)
 
-    const toolResponse = await runTool(toolCall, userMessage)
-    await saveToolResponse(toolCall.id, toolResponse)
-    loader.update(`executed: ${toolCall.function.name}`)
+      loader.update(`executed: ${toolCall.function.name}`)
+    }
   }
 
   loader.stop()
