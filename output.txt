@@ -1,0 +1,16 @@
+npm start "create a meme image for worldwar 1 vs worldwar2 "
+
+> start
+> npx tsx index.ts create a meme image for worldwar 1 vs worldwar2 
+
+⠴ 🤔 Thinking...
+[ASSISTANT]
+generate_image
+
+⠸ executed: generate_image
+[ASSISTANT]
+Here is the meme image comparing World War 1 and World War 2:
+
+![World War 1 vs World War 2 Meme](https://oaidalleapiprodscus.blob.core.windows.net/private/org-AM8rkjGrcwMKywckzR6zxV6N/user-7mVfw6WGkBnJ2Hf0ed68cYDl/img-BD1myb6BvQ77rDk40LaliNLI.png?st=2025-12-19T17%3A07%3A37Z&se=2025-12-19T19%3A07%3A37Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=ed3ea2f9-5e38-44be-9a1b-7c1e65e4d54f&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-12-19T18%3A07%3A37Z&ske=2025-12-20T18%3A07%3A37Z&sks=b&skv=2024-08-04&sig=RbVOPx%2Bf2oU/NRudELEMAqsgbubZrWa9LE99DDqew1c%3D)
+
+Feel free to share it!
