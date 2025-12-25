@@ -1,20 +1,15 @@
 import 'dotenv/config'
 import { runAgent } from './src/agent'
 import { tools } from './src/tools'
+import http from 'http'
 
 const userMessage = process.argv[2]
 
-if (!userMessage) {
-  console.error('Please provide a message')
-  process.exit(1)
+if (userMessage) {
+  await runAgent({ userMessage, tools })
+} else {
+  console.log('No message provided. Running in server mode.')
 }
-
-await runAgent({userMessage,tools})
-
-
-
-
-import http from 'http'
 
 http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' })
